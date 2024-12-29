@@ -14,8 +14,8 @@ In Node, you can use ES2015 modules either by:
 
 Example:
 
-```json
-// package.jsonc
+```jsonc
+// package.json
 {
   "name": "node-test",
   "version": "0.0.0",
