@@ -142,3 +142,61 @@ export default Object.freeze({
 | **Encapsulation** | Strong encapsulation of variables and functions. Non-exported values remain private.              | Encapsulates the instance but usually exposes methods publicly.   |
 | **State**         | Has no intrinsic state (unless explicitly created).                                               | Retains state because it is always the same object or instance.   |
 | **Applications**  | Organizing code, utility libraries.                                                               | Managing global resources (e.g., DB connections, configuration).  |
+
+## 1.4 - Proxy Pattern
+
+It uses a `Proxy intercept and control interactions to target objects`.
+
+The Proxy object `receives two arguments`:
+
+1. The `target` object
+2. A `handler object`, which we can use to add functionality to the proxy. This object comes with some built-in functions that we can use, such as get and set.
+
+```js
+const person = {
+  name: "John Doe",
+  age: 42,
+  email: "john@doe.com",
+  country: "Canada",
+};
+
+const personProxy = new Proxy(person, {
+  get: (target, prop) => {
+    console.log(`The value of ${prop} is ${target[prop]}`);
+    return target[prop];
+  },
+  set: (target, prop, value) => {
+    console.log(`Changed ${prop} from ${target[prop]} to ${value}`);
+    target[prop] = value;
+    return true;
+  },
+});
+
+// The get method on the handler object gets invoked when we want to access a property,
+// and the set method gets invoked when we want to modify a property.
+```
+
+### 1.4.1 - Reflect
+
+The built-in Reflect object makes it easier to manipulate the target object.
+
+Instead of accessing properties through `obj[prop]` or setting properties through `obj[prop]` = value, we can access or modify properties on the target object through Reflect.get() and Reflect.set(). The methods receive the same arguments as the methods on the handler object.
+
+```js
+new Proxy(person, {
+  get: (target, prop) => {
+    return Reflect.get(target, prop);
+  },
+  set: (target, prop, value) => {
+    return Reflect.get(target, prop, value);
+  },
+});
+```
+
+Pros:
+
+- Control - Proxies make it easy to add functionality when interacting with a certain object, such as validation, logging, formatting, notifications, debugging.
+
+Cons:
+
+- Long handler execution - Executing handlers on every object interaction could lead to performance issues.
