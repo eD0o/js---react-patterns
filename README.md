@@ -223,7 +223,7 @@ The Observer Pattern is a design pattern that `defines a one-to-many relationshi
 
 ### 1.5.2 Common Implementations in JavaScript
 
-DOM Events (addEventListener):
+**DOM Events (addEventListener)**:
 
 The DOM's event-handling mechanism is a built-in example of the Observer Pattern. Here, the `addEventListener method allows observers to subscribe to events emitted by a DOM element` (the observable).
 
@@ -243,7 +243,7 @@ In this example:
 
 ---
 
-Manual Implementation with notify, subscribe, and unsubscribe:
+**Manual Implementation with notify, subscribe, and unsubscribe**:
 
 This is a classic way to implement the Observer Pattern manually. `Observers subscribe to an observable, which then notifies` them when an event occurs.
 
@@ -265,7 +265,7 @@ export default Object.freeze({
 
 ---
 
-Classes
+**Classes**:
 
 Using classes `allows for multiple independent observables, each managing its own observers`.
 
@@ -297,7 +297,7 @@ observable.notify("Hello, Observer Pattern!");
 
 ---
 
-Using Object.freeze (Immutability and Singleton)
+**Using Object.freeze (Immutability and Singleton)**:
 
 This approach `creates an immutable singleton observable object`. It's `useful when you have a single global event` source.
 
@@ -319,7 +319,7 @@ export default Object.freeze({
 
 ---
 
-Promises and then (Observing Async Flows)
+**Promises and then (Observing Async Flows)**:
 
 You "subscribe" to a result using then or catch.
 
@@ -335,7 +335,7 @@ promise.then((data) => console.log(data));
 
 ---
 
-RxJS and Observables (Reactive Streams)
+**RxJS and Observables (Reactive Streams)**:
 
 RxJS `provides a robust implementation of the Observer Pattern`, enabling asynchronous streams of data.
 
@@ -352,7 +352,7 @@ observable.subscribe((data) => console.log(data));
 
 ---
 
-EventEmitter in Node.js
+**EventEmitter in Node.js**:
 
 Node.js provides a built-in implementation of the Observer Pattern through the `EventEmitter class`.
 
