@@ -368,3 +368,55 @@ emitter.emit("event", "Hello, EventEmitter!");
 ```
 
 ---
+
+## 1.6 - Factory Pattern
+
+Useful when we have to create multiple objects that share the same properties, without having to repeat the same code over and over. A factory function can easily return a custom object depending on the current environment, or user-specific configuration.
+
+```js
+const createUser = (firstName, lastName) => ({
+  id: crypto.randomUUID(),
+  createdAt: Date.now(),
+  firstName,
+  lastName,
+  fullName: `${firstName} ${lastName}`,
+});
+
+createUser("John", "Doe");
+createUser("Sarah", "Doe");
+createUser("Lydia", "Hallie");
+```
+
+> Actually not really a pattern: In JavaScript, the factory pattern `isn't much more than a function that returns an object without using the 'new' keyword`. ES6 arrow functions allow us to create small factory functions that implicitly return an object each time.
+
+However, in many cases it may be more memory efficient to create new instances instead of new objects each time:
+
+```js
+class User {
+  constructor(firstName, lastName, email) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+  }
+
+  async getPosts() {
+    const posts = await fetch(`https://my.cms.com/posts/user/${this.id}`);
+    return posts;
+  }
+}
+
+const user1 = new User({
+  firstName: "John",
+  lastName: "Doe",
+  email: "john@doe.com",
+});
+
+const user2 = new User({
+  firstName: "Jane",
+  lastName: "Doe",
+  email: "jane@doe.com",
+});
+
+// The fullName method is the same for all the objects that were created.
+// By creating new instances, the fullName method is available on the prototype instead of on the objec, which saves memory.
+```
