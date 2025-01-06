@@ -371,7 +371,7 @@ emitter.emit("event", "Hello, EventEmitter!");
 
 ## 1.6 - Factory Pattern
 
-Useful when we have to create multiple objects that share the same properties, without having to repeat the same code over and over. A factory function can easily return a custom object depending on the current environment, or user-specific configuration.
+The factory pattern is `useful when creating multiple objects with shared properties`, avoiding repetitive code. A factory function `returns a custom object based on specific configurations, such as environment or user preferences`.
 
 ```js
 const createUser = (firstName, lastName) => ({
@@ -387,16 +387,22 @@ createUser("Sarah", "Doe");
 createUser("Lydia", "Hallie");
 ```
 
-> Actually not really a pattern: In JavaScript, the factory pattern `isn't much more than a function that returns an object without using the 'new' keyword`. ES6 arrow functions allow us to create small factory functions that implicitly return an object each time.
+> Note: In JavaScript, the `factory pattern is essentially a function that returns an object without using the new keyword`. ES6 arrow functions make it easier to create concise factory functions that implicitly return objects.
 
-However, in many cases it may be more memory efficient to create new instances instead of new objects each time:
+However, for `cases where methods need to be shared across all instances, using class may be more memory-efficient`. This ensures methods are stored on the prototype rather than recreated for every object.
 
 ```js
 class User {
-  constructor(firstName, lastName, email) {
+  constructor({ firstName, lastName, email }) {
+    this.id = crypto.randomUUID();
+    this.createdAt = Date.now();
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
+  }
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
   }
 
   async getPosts() {
@@ -416,6 +422,8 @@ const user2 = new User({
   lastName: "Doe",
   email: "jane@doe.com",
 });
+
+// Methods like getPosts are shared across instances via the prototype, saving memory.
 
 // The fullName method is the same for all the objects that were created.
 // By creating new instances, the fullName method is available on the prototype instead of on the objec, which saves memory.
