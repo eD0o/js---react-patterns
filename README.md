@@ -454,7 +454,7 @@ const dog3 = createDog("Joy", 6);
 const dog4 = createDog("Spot", 8);
 ```
 
-[!](https://javascriptpatterns.vercel.app/design-patterns/prototype-pattern/3.png)
+![](https://javascriptpatterns.vercel.app/design-patterns/prototype-pattern/3.png)
 
 > This way creates unique bark and wagTail functions for every dog object, leading to unnecessary memory usage.
 
@@ -482,7 +482,7 @@ const dog4 = new Dog("Spot", 8);
 // In this example, bark and wagTail are defined on Dog.prototype and shared across all instances.
 ```
 
-[!](https://javascriptpatterns.vercel.app/design-patterns/prototype-pattern/4.png)
+![](https://javascriptpatterns.vercel.app/design-patterns/prototype-pattern/4.png)
 
 Pros: 
 - Memory efficient: Shared methods on the prototype chain reduce duplication.
@@ -491,4 +491,4 @@ Pros:
 Cons: 
 - Readaibility: Deep inheritance chains can make it difficult to trace property origins. For example, a BorderCollie class inheriting from Animal might obscure where specific properties are defined.
 
-[!](https://javascriptpatterns.vercel.app/design-patterns/prototype-pattern/2.png)
+![](https://javascriptpatterns.vercel.app/design-patterns/prototype-pattern/2.png)
